@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<!-- 打开调试模式,获取更多的调试信息 -->  
+   <constant name="struts.devMode" value="true"></constant>  
+  <!--  使用spring容器来管理struts的action -->  
+    <constant name="struts.objectFactory" value="spring"></constant>  
+	<constant name="struts.configuration.xml.reload" value="true"></constant> 
+	
+	<package name="eartaginfo" namespace="/eartaginfo" extends="struts-default">
+  		<action name="eartaginfoaction_*" class="earTagInfoAddAction" method="{1}">
+  	</action>
+  </package>
+  
+  <package name="salecodeinfo" namespace="/salecodeinfo" extends="struts-default">
+  		<action name="salecodeinfoaction_*" class="saleCodeInfoAction" method="{1}">
+  	</action>
+  </package>
+  
+</struts>    

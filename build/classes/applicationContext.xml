@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
+	xmlns:tx="http://www.springframework.org/schema/tx">
+
+
+
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="AgricBack" />
+	</bean>
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor">
+	</bean>
+	<bean
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor">
+	</bean>
+
+	<bean id="EartagDAO" class="com.undergrowth.bean.service.interimple.EartagDAO"></bean>
+	<bean id="SalecodeDAO" class="com.undergrowth.bean.service.interimple.SalecodeDAO"></bean>
+	
+	<bean id="earTagInfoAddAction" class="com.undergrowth.action.EarTagInfoAdd">  
+    	<!-- 注入数据访问层 -->  
+        <property name="eartagDAO" ref="EartagDAO"></property>  
+        <property name="earTagVo">
+        	<bean class="com.undergrowth.bean.vo.EarTagVo"></bean>
+        </property>
+   	 </bean> 
+	
+	<bean id="saleCodeInfoAction" class="com.undergrowth.action.SaleCodeInfoAction">
+		<property name="salecodeDAO" ref="SalecodeDAO"></property>
+		<property name="eartagDAO" ref="EartagDAO"></property>
+	</bean>
+	
+</beans>
